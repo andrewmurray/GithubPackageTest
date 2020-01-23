@@ -13,6 +13,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.2.108
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
     - name: Package and publish with dotnet
       run: |
         dotnet pack $GITHUB_WORKSPACE/src/ --configuration Release
