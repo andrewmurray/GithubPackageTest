@@ -13,5 +13,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.2.108
-    - name: Build with dotnet
-      run: dotnet build $GITHUB_WORKSPACE/src/ --configuration Release
+    - name: Package and publish with dotnet
+      run: |
+        dotnet pack $GITHUB_WORKSPACE/src/ --configuration Release
+        dotnet nuget push "$GITHUB_WORKSPACE/src/GithubPackageTest/bin/Release/GithubPackageTest.*.nupkg" --source "github"
