@@ -13,9 +13,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.2.108
-    - name: Package and publish with dotnet
-      run: |
-        cd src/
-        dotnet restore
-        dotnet pack --configuration Release
-        dotnet nuget push "$GITHUB_WORKSPACE/src/GithubPackageTest/bin/Release/GithubPackageTest.*.nupkg" --source "github" --api-key ${{ secrets.GITHUB_TOKEN }}
+    - name: Nuget Restore
+      run: dotnet restore src/
+    - name: Package
+      run: dotnet pack src/ --configuration Release
+    - name: Publish
+      run: dotnet nuget push "$GITHUB_WORKSPACE/src/GithubPackageTest/bin/Release/GithubPackageTest.*.nupkg" --source "github" --api-key ${{ secrets.GITHUB_TOKEN }}
